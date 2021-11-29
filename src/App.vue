@@ -2,7 +2,6 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-    <el-button>按钮</el-button>
   </div>
   <router-view />
 </template>
@@ -22,9 +21,20 @@
   a {
     font-weight: bold;
     color: #2c3e50;
-
+    text-decoration: none;
     &.router-link-exact-active {
       color: #42b983;
+      position: relative;
+      &::after {
+        content: '';
+        width: 20px;
+        height: 3px;
+        background: #42b983;
+        position: absolute;
+        bottom: -0.3rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 }
