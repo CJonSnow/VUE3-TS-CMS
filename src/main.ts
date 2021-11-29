@@ -27,7 +27,17 @@ createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
 //     }
 //   }
 // })
-zyRequest.request({
-  url: '/home/multidata',
-  method: 'GET'
-})
+interface DataType {
+  data: any
+  returnCode: string
+  success: boolean
+}
+zyRequest
+  .get<DataType>({
+    url: '/home/multidata'
+  })
+  .then((res) => {
+    console.log(res.data)
+    console.log(res.returnCode)
+    console.log(res.success)
+  })

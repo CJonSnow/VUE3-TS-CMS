@@ -69,22 +69,48 @@ class ZYRequest {
     )
   }
 
-  request(config: ZYRequestConfig): void {
-    if (config.interceptors?.requestInterceptor) {
-      config = config.interceptors.requestInterceptor(config)
-    }
-    // 为何在此判断，因为会在拦截器前执行
-    if (config.showLoading === false) {
-      this.showLoading = config.showLoading
-    }
-    this.instance.request(config).then((res) => {
-      if (config.interceptors?.responseInterceptor) {
-        res = config.interceptors.responseInterceptor(res)
+  request<T>(config: ZYRequestConfig): Promise<T> {
+    return new Promise((resolve, reject) => {
+      if (config.interceptors?.requestInterceptor) {
+        config = config.interceptors.requestInterceptor(config)
       }
-      console.log(res)
-      //  将showLoading设置成true，这样不会影响下一个请求
-      this.showLoading = DEFAULT_LOADING
+      // 为何在此判断，因为会在拦截器前执行
+      if (config.showLoading === false) {
+        this.showLoading = config.showLoading
+      }
+
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            // res = config.interceptors.responseInterceptor(res)
+          }
+          console.log(res)
+          //  将showLoading设置成true，这样不会影响下一个请求
+          this.showLoading = DEFAULT_LOADING
+          resolve(res)
+        })
+        .catch((err) => {
+          this.showLoading = DEFAULT_LOADING
+          reject(err)
+          return err
+        })
     })
+  }
+  get<T>(config: ZYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' })
+  }
+
+  post<T>(config: ZYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'POST' })
+  }
+
+  delete<T>(config: ZYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' })
+  }
+
+  patch<T>(config: ZYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
 
