@@ -69,7 +69,7 @@ class ZYRequest {
     )
   }
 
-  request<T>(config: ZYRequestConfig): Promise<T> {
+  request<T>(config: ZYRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -83,7 +83,7 @@ class ZYRequest {
         .request<any, T>(config)
         .then((res) => {
           if (config.interceptors?.responseInterceptor) {
-            // res = config.interceptors.responseInterceptor(res)
+            res = config.interceptors.responseInterceptor(res)
           }
           console.log(res)
           //  将showLoading设置成true，这样不会影响下一个请求

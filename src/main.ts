@@ -1,8 +1,12 @@
 import { createApp } from 'vue'
 // import { registerApp } from './global'
+import 'normalize.css'
+import './assets/css/index.less'
+
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
+
 import router from './router'
 import store from './store'
 import zyRequest from './service/index'

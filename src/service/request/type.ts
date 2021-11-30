@@ -1,14 +1,14 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
-export interface ZYRequestInterceptors {
+export interface ZYRequestInterceptors<T = AxiosResponse> {
   // interceptors 规定传入的value中的可用值
-  requestInterceptor?: (config: any) => any
+  requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig
   requestInterceptorCatch?: (error: any) => any
-  responseInterceptor?: (res: any) => any
+  responseInterceptor?: (res: T) => T
   responseInterceptorCatch?: (error: any) => any
 }
 
 export interface ZYRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
   // interceptors 规定传入的key
-  interceptors?: ZYRequestInterceptors
+  interceptors?: ZYRequestInterceptors<T>
   showLoading?: boolean
 }
