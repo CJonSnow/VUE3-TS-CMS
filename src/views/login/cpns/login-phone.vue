@@ -14,16 +14,23 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
+    const store = useStore()
     const phone = reactive({
       num: '',
       code: ''
     })
 
+    const phoneLoginAction = () => {
+      // 进行登录验证
+      store.dispatch('loginModule/phoneLoginAction', { ...phone })
+    }
     return {
-      phone
+      phone,
+      phoneLoginAction
     }
   }
 })

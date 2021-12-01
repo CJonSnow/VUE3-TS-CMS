@@ -28,7 +28,7 @@ class ZYRequest {
     // 添加所有的实例都有的拦截器（会先执行）
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('所有的实例都有的拦截器：请求拦截成功')
+        // console.log('所有的实例都有的拦截器：请求拦截成功')
         if (this.showLoading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -39,30 +39,30 @@ class ZYRequest {
         return config
       },
       (err) => {
-        console.log('所有的实例都有的拦截器：请求拦截失败')
+        // console.log('所有的实例都有的拦截器：请求拦截失败')
         return err
       }
     )
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有的实例都有的拦截器：响应拦截成功')
+        // console.log('所有的实例都有的拦截器：响应拦截成功')
         // 将loading移除
         this.loading?.close()
         const data = res.data
         // 根据后端所提供的状态码，显示不同信息
         if (data.returnCode === '-1001') {
-          console.log('请求失败，错误信息')
+          // console.log('请求失败，错误信息')
         } else {
           return res.data
         }
       },
       (err) => {
-        console.log('所有的实例都有的拦截器：响应拦截失败')
+        // console.log('所有的实例都有的拦截器：响应拦截失败')
         // 将loading移除
         this.loading?.close()
         // 判断不同的HttpErrorCode 显示不同的错误信息
         if (err.response.status === 404) {
-          console.log('404错误~')
+          // console.log('404错误~')
         }
         return err
       }
@@ -85,7 +85,7 @@ class ZYRequest {
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }
-          console.log(res)
+          // console.log(res)
           //  将showLoading设置成true，这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
           resolve(res)

@@ -10,12 +10,13 @@ import 'element-plus/theme-chalk/index.css'
 import router from './router'
 import store from './store'
 import zyRequest from './service/index'
+import { setupStore } from './store'
 
 // import './service/axios_demo'
 
-// const app = createApp(App)
-// registerApp(app)
 createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
+// 页面刷新vuex缓存数据不清空
+setupStore()
 
 // zyRequest.request({
 //   url: '/home/multidata',
@@ -36,12 +37,12 @@ interface DataType {
   returnCode: string
   success: boolean
 }
-zyRequest
-  .get<DataType>({
-    url: '/home/multidata'
-  })
-  .then((res) => {
-    console.log(res.data)
-    console.log(res.returnCode)
-    console.log(res.success)
-  })
+// zyRequest
+//   .get<DataType>({
+//     url: '/home/multidata'
+//   })
+//   .then((res) => {
+//     // console.log(res.data)
+//     // console.log(res.returnCode)
+//     // console.log(res.success)
+//   })

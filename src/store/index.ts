@@ -1,9 +1,9 @@
 import { createStore } from 'vuex'
 
-interface IRootState {
-  name: string
-  age: number
-}
+import loginModule from './login/login'
+
+import { IRootState } from './type'
+
 // 最好对类型进行限制
 const store = createStore<IRootState>({
   state: () => {
@@ -19,7 +19,15 @@ const store = createStore<IRootState>({
     }
   },
   actions: {},
-  modules: {}
+  modules: {
+    // 模块导入
+    loginModule
+  }
 })
+
+// 页面刷新vuex缓存数据不清空
+export function setupStore() {
+  store.dispatch('loginModule/loadLocalLogin')
+}
 
 export default store
