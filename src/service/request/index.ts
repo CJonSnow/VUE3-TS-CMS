@@ -3,7 +3,7 @@ import type { AxiosInstance } from 'axios'
 import type { ZYRequestInterceptors, ZYRequestConfig } from './type'
 
 import { ElLoading } from 'element-plus'
-import { ILoadingInstance } from 'element-plus/lib/components/loading/index'
+import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type'
 
 const DEFAULT_LOADING = true
 class ZYRequest {

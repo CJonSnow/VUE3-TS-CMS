@@ -5,11 +5,10 @@ import './assets/css/index.less'
 
 import App from './App.vue'
 import ElementPlus from 'element-plus'
-import 'element-plus/theme-chalk/index.css'
+import 'element-plus/lib/theme-chalk/index.css'
 
 import router from './router'
 import store from './store'
-import zyRequest from './service/index'
 import { setupStore } from './store'
 
 // import './service/axios_demo'
@@ -31,12 +30,12 @@ setupStore()
 //       return res
 //     }
 //   }
-// })
-interface DataType {
-  data: any
-  returnCode: string
-  success: boolean
-}
+// // })
+// interface DataType {
+//   data: any
+//   returnCode: string
+//   success: boolean
+// }
 // zyRequest
 //   .get<DataType>({
 //     url: '/home/multidata'

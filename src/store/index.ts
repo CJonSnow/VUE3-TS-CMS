@@ -1,8 +1,8 @@
-import { createStore } from 'vuex'
+import { createStore, Store, useStore as useVuexStore } from 'vuex'
 
 import loginModule from './login/login'
 
-import { IRootState } from './type'
+import { IRootState, IStoreType } from './type'
 
 // 最好对类型进行限制
 const store = createStore<IRootState>({
@@ -28,6 +28,11 @@ const store = createStore<IRootState>({
 // 页面刷新vuex缓存数据不清空
 export function setupStore() {
   store.dispatch('loginModule/loadLocalLogin')
+}
+
+// 对vuex和ts的类型整合
+export function useStore(): Store<IStoreType> {
+  return useVuexStore()
 }
 
 export default store
