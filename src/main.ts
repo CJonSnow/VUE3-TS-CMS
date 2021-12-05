@@ -13,9 +13,13 @@ import { setupStore } from './store'
 
 // import './service/axios_demo'
 
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
-// 页面刷新vuex缓存数据不清空
+const app = createApp(App)
+app.use(store)
+// 页面刷新vuex缓存数据不清空,并且要放在路由注册之前
 setupStore()
+app.use(router)
+app.use(ElementPlus)
+app.mount('#app')
 
 // zyRequest.request({
 //   url: '/home/multidata',

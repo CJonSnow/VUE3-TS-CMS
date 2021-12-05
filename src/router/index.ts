@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
+import { firstMenu } from '@/utils/map-menus'
 
 import localCache from '@/utils/cache'
 
@@ -36,6 +37,10 @@ router.beforeEach((to) => {
     if (!istoken) {
       return '/login'
     }
+  }
+  // 当为/main 时跳转到默认路径
+  if (to.path === '/main') {
+    return firstMenu.url
   }
   // const istoken = localCache.getCache('token')
   // if (to.path === '/login' && istoken) {
